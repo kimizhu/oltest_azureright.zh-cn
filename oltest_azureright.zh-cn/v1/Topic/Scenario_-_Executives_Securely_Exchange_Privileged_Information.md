@@ -1,0 +1,93 @@
+---
+description: na
+keywords: na
+pagetitle: Scenario - Executives Securely Exchange Privileged Information
+search: na
+ms.date: na
+ms.service: rights-management
+ms.tgt_pltfrm: na
+ms.topic: article
+ms.assetid: e18cf5df-859e-4028-8d19-39b0842df33d
+---
+# 应用场景 - 高级管理人员安全地交换特权信息
+本部分包含管理员说明以及有关用户说明的指导。在通知用户有关此配置的事宜之前，必须先阅读针对管理员的说明。
+
+## 管理员的指令
+![](../Image/AzRMS_AdminBanner.png)
+
+请按这些说明操作，以便高级管理人员可以安全地通过电子邮件彼此交换电子邮件和附件，而策略会自动将访问权限限制为高级管理人员而无需他们专门采取任何操作。电子邮件和附件将由 Azure 权限管理保护。
+
+这些指令适用于下面一组情况：
+
+-   高级管理人员彼此间共享不能与他人共享的机密信息。
+
+-   除了发送到工作电子邮件地址而不是私人电子邮件地址外，高级管理人员在发送电子邮件时需要执行的操作没有任何不同。
+
+## 本方案的要求
+要让针对此应用场景的说明生效，必须做好以下准备：
+
+|Check|要求|需要更多信息|
+|---------|------|----------|
+|![](../Image/4d269a30-a873-45c5-87de-30ee6558e7b0.gif)|已准备好 Office 365 或 Azure Active Directory 的帐户和组：<br /><br />-   一个名为**高级管理人员**并已启用邮件的组<br />-   所有高级管理人员都是**高级管理人员**组的成员|[准备 Azure 权限管理](https://technet.microsoft.com/library/jj585029.aspx)|
+|![](../Image/4d269a30-a873-45c5-87de-30ee6558e7b0.gif)|你的 Azure 权限管理租户密钥由 Microsoft 管理；你没有使用 BYOK|[计划和实现你的 Azure 权限管理租户密钥](https://technet.microsoft.com/library/dn440580.aspx)|
+|![](../Image/4d269a30-a873-45c5-87de-30ee6558e7b0.gif)|已激活 Azure Rights Management|[激活 Azure 权限管理](https://technet.microsoft.com/library/jj658941.aspx)|
+|![](../Image/4d269a30-a873-45c5-87de-30ee6558e7b0.gif)|已为 Azure 权限管理启用了 Exchange Online|展开 [Exchange Online:IRM 配置](https://technet.microsoft.com/library/jj585031.aspx)部分中的[为 Azure 权限管理配置应用程序](https://technet.microsoft.com/library/jj585031.aspx)。|
+|![](../Image/4d269a30-a873-45c5-87de-30ee6558e7b0.gif)|已按下文所述配置了自定义模板|[为 Azure 权限管理配置自定义模板](https://technet.microsoft.com/library/dn642472.aspx)|
+|![](../Image/4d269a30-a873-45c5-87de-30ee6558e7b0.gif)|已按下文所述为 IRM 配置了传输保护规则|[创建传输保护规则](https://technet.microsoft.com/library/dd302432.aspx)|
+
+#### 为高级管理人员电子邮件配置自定义模板：
+
+1.  在 Azure 门户中：为 Azure 权限管理创建一个新的自定义模板，其中包含以下值和设置：
+
+    -   名称：**高级管理人员**
+
+    -   权限：授予已启用邮件的高级管理人员组**共有者**权限
+
+2.  发布新的模板。
+
+3.  使用 Windows PowerShell for Exchange Online 命令为 Exchange Online 刷新模板：
+
+    ```
+    Import-RMSTrustedPublishingDomain -Name "RMS Online -1" -RefreshTemplates –RMSOnline
+    ```
+
+#### 将高级管理人员的往来电子邮件配置为自动受保护：
+
+-   在 Exchange 管理中心中：创建一个新的邮件流规则，其中包含以下值和设置：
+
+    -   单击“新建”图标，然后选择**对邮件应用权限保护**
+
+    -   在**新建规则**页面：
+
+        -   指定一个名称，如**对高级管理人员电子邮件应用高级管理人员模板**
+
+        -   对于**在以下情况下应用此规则**，选择**发件人**...**是此组的成员**并选择**高级管理人员**。
+
+        -   单击**添加条件**，选择**收件人**...**是此组的成员**并选择**高级管理人员**。
+
+        -   为**执行下列操作**，请确保**对以下邮件应用权限保护**处于选中状态，单击**选择一个**选择**高级管理人员**模板。
+
+        -   确保对于**为此规则选择一种模式**，已选中**强制**。
+
+        -   单击**保存**。
+
+## 用户指令
+本应用场景没有针对用户的特别说明，因为保护高级管理人员的往来电子邮件不需要他们采取任何特殊操作。电子邮件和所有附件会自动受到保护，以便只有高级管理人员组的成员可以访问它们。但是，你可能需要告知高级管理人员和技术支持这些电子邮件会自动受到保护以及这会对他们使用电子邮件有哪些限制。例如，如果这些电子邮件或附件以后转发给其他人，则无法被其他人成功阅读。
+
+下面的示例可作为针对此应用场景配置 Exchange Online 后给高级管理人员的标准电子邮件通信。
+
+### 示例用户文档
+![](../Image/AzRMS_ExampleBanner.png)
+
+##### IT 公告：高级管理人员的电子邮件现已自动受到保护
+
+-   从现在起，每次将电子邮件发送给公司内的其他高级管理人员时，电子邮件的内容和附件将自动受到保护，只有公司内的其他高级管理人员可以访问并进行阅读信息、打印、复制等操作。即使将电子邮件转发给其他人或保存附件，此限制仍适用。这种保护可帮助防止机密或敏感信息的数据丢失。
+
+    请注意，如果希望其他人能够阅读和编辑这些电子邮件中的信息，必须单独为这些人发送电子邮件。
+
+    将公司机密信息发送给其他高级管理人员时，请记得发送到其工作电子邮件地址，不要发送到私人电子邮件地址。
+
+**需要帮助吗?**
+
+-   请联系技术支持：helpdesk@vanarsdelltd.com
+
