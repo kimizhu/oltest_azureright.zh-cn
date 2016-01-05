@@ -7,7 +7,7 @@ ms.date: na
 ms.service: rights-management
 ms.tgt_pltfrm: na
 ms.topic: article
-ms.assetid: f8707e01-b239-4d1a-a1ea-0d1cf9a8d215
+ms.assetid: f8707e01-b239-4d1a-a1ea-0d1cf9a8d214
 ---
 # 激活 Azure 权限管理
 <?xml version="1.0" encoding="utf-8"?>
