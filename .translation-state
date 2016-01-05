@@ -1,6 +1,6 @@
 {
   "LastProcessedCommit": "19a950a6167847b359b6aa7e022aaeeb32319fb1",
-  "LastTranslatedCommit": "cc36221d48a6bc3fcd9f8c5399e6b21867f5e94e",
+  "LastTranslatedCommit": "8e5221a5d049f78b47b77a766a8263fb5182024d",
   "Items": {
     "efd2e5c5ac1aed7a62b9b369d6c7d744d4e7c45e": {
       "FileHash": "efd2e5c5ac1aed7a62b9b369d6c7d744d4e7c45e",
@@ -15,7 +15,7 @@
       "HandoffFileCommit": null,
       "HandoffDateTime": "0001-01-01T00:00:00",
       "HandoffException": null,
-      "TargetFileCommit": "cc36221d48a6bc3fcd9f8c5399e6b21867f5e94e",
+      "TargetFileCommit": "8e5221a5d049f78b47b77a766a8263fb5182024d",
       "TargetFilePath": "oltest_azureright.zh-cn\\v1\\Topic\\Activating_Azure_Rights_Management.md",
       "HandbackFilePath": null,
       "HandbackFileCommit": null,
